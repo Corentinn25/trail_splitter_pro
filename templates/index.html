@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trail Splitter Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-white font-sans">
+    
+    <nav class="p-6 border-b border-slate-800">
+        <h1 class="text-2xl font-bold text-green-400">🏃 Trail Splitter Pro</h1>
+    </nav>
+
+    <main class="container mx-auto mt-10 p-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div class="bg-slate-800 p-6 rounded-xl shadow-xl space-y-6">
+                <h2 class="text-xl font-semibold mb-4 text-green-400">📁 Données & Objectifs</h2>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-2 text-slate-300">Fichier GPX</label>
+                    <input type="file" id="gpxFile" class="block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-600 file:text-white hover:file:bg-green-700 cursor-pointer"/>
+                </div>
+
+                <hr class="border-slate-700">
+
+                <div>
+                    <label class="block text-sm font-medium mb-1 text-slate-300">Ta Côte UTMB</label>
+                    <input type="number" id="input_cote" value="500" min="200" max="1000" 
+                           class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white outline-none focus:border-green-400 transition-all">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-1 text-slate-300">Temps visé (heures)</label>
+                    <div id="display_temps" class="text-2xl font-mono font-bold text-green-400 mb-1">0 : 00 : 00</div>
+                    <input type="number" id="input_temps" value="0" step="0.25" 
+                           class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white outline-none focus:border-green-400 transition-all">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-1 text-slate-300">Allure (min/km)</label>
+                    <div id="display_allure" class="text-2xl font-mono font-bold text-green-400 mb-1">0 : 00</div>
+                    <input type="number" id="input_allure" value="0" step="0.1" 
+                           class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2 text-white outline-none focus:border-green-400 transition-all">
+                </div>
+            </div>
+
+            <div class="md:col-span-2 space-y-8">
+                <div id="result_area" class="bg-slate-800 p-6 rounded-xl shadow-xl min-h-[400px] flex items-center justify-center border-2 border-dashed border-slate-700">
+                    <p class="text-slate-500 italic text-center">
+                        Chargez un fichier GPX pour générer votre profil altimétrique et votre tableau de marche.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
