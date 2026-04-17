@@ -1,20 +1,15 @@
 import pandas as pd
 
-def compute_segments(df, threshold=50, tolerance=30):
-    # Logique simplifiée pour l'exemple (à adapter selon ton ancien code)
-    # L'objectif est de retourner un DataFrame avec : 
-    # ['Section', 'Distance (km)', 'D+ (m)', 'D- (m)', 'Cumul (km)']
-    
+def compute_segments(df):
     segments = []
-    # ... (Copie ici ta logique de boucle qui détecte les changements de pente)
-    
-    # Pour le test, on peut retourner un segment global si tu n'as pas encore fini
-    segments.append({
-        'Section': 1,
-        'Distance (km)': df['dist_cum'].max(),
-        'D+ (m)': df['ele_diff'].clip(lower=0).sum(),
-        'D- (m)': abs(df['ele_diff'].clip(upper=0).sum()),
-        'Cumul (km)': df['dist_cum'].max()
-    })
-    
+    # Exemple de découpage tous les 10km pour tester l'affichage
+    step = 10 
+    for i in range(0, int(df['dist_cum'].max()), step):
+        sub_df = df[(df['dist_cum'] >= i) & (df['dist_cum'] < i + step)]
+        if not sub_df.empty:
+            segments.append({
+                'Distance (km)': round(sub_df['dist_diff'].sum(), 2),
+                'D+ (m)': int(sub_df['ele_diff'].clip(lower=0).sum()),
+                'D- (m)': int(abs(sub_df['ele_diff'].clip(upper=0).sum()))
+            })
     return pd.DataFrame(segments)
